@@ -1,0 +1,63 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+
+ext {
+    supportLibVersion = '28.0.0'
+
+    //Bintray Configuration
+    bintrayRepo = 'maven'
+    bintrayName = 'com.otb.utility:preference'
+
+    publishedGroupId = 'com.otb.utility'
+    artifact = 'preference'
+    libraryVersion = '0.0.1'
+
+    libraryName = 'Preference Utlity'
+    libraryDescription = 'Utlity to use shared preference in your app.'
+
+    siteUrl = 'https://github.com/mohitrajput987/android-utility'
+    gitUrl = 'https://github.com/mohitrajput987/android-utility.git'
+
+    developerId = 'ourtechnobytes'
+    developerName = 'Our Techno Bytes'
+    developerEmail = 'info@ourtechnobytes.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+
+    //Bintray Credentials
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+    bintrayUsername = properties.getProperty('BINTRAY_USERNAME')
+    bintrayUserOrg = properties.getProperty('BINTRAY_ORG')
+    bintrayApiKey = properties.getProperty('BINTRAY_API_KEY')
+}
+
+android {
+    compileSdkVersion 28
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 1
+        versionName libraryVersion
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "com.android.support:appcompat-v7:$supportLibVersion"
+}
+
+apply from: 'bintray.script'
