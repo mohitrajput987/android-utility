@@ -24,5 +24,6 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferenceUtils.getInstance(context).saveBoolean("is_logged_in", true);
         boolean isLoggedIn = SharedPreferenceUtils.getInstance(context).getBoolean("is_logged_in");
         Log.d(TAG, "init(): isLoggedIn=" + isLoggedIn);
+        SharedPreferenceUtils.getInstance(context).clear();
     }
 }
